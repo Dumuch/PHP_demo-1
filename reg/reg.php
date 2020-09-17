@@ -1,23 +1,40 @@
 <!-- получаем данные с формы и фильтруем вводимые данные-->
 <?php
-  $username = trim(filter_var($_POST['username'], FILTER_SANITIZE_STRING));
-  $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
-  $login = trim(filter_var($_POST['login'], FILTER_SANITIZE_STRING));
-  $password = trim(filter_var($_POST['password'], FILTER_SANITIZE_STRING));
+  $username = filter_var(trim($_POST['username']), FILTER_SANITIZE_STRING);
+  $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
+  $login = filter_var(trim($_POST['login']), FILTER_SANITIZE_STRING);
+  $pass = filter_var(trim($_POST['pass']), FILTER_SANITIZE_STRING);
 
   // проверка на длину
-  if(strlen($username) <= 3)
+  if(mb_strlen($username) < 3 || mb_strlen($username) > 90) {
+    echo 'Недопустимая длина имени';
     exit();
-  else if(strlen($email) <= 3)
+  } else if(mb_strlen($email) < 2 || mb_strlen($email) > 50) {
+    echo 'Недопустимая длина Email';
     exit();
-  else if(strlen($login) <= 3)
+  } else if(mb_strlen($login) < 2 || mb_strlen($login) > 6) {
+    echo 'Недопустимая длина логина';
     exit();
-  else if(strlen($password) <= 3)
+  } else if(mb_strlen($pass) < 2 || mb_strlen($pass) > 6) {
+    echo 'Недопустимая длина пароля(от 2 до 6 символов)';
     exit();
+  }
+
 
   // шифруем пароль
   $hash = "reiuljkfikem8478iKJjntg";
-  $password = md5($password . $hash);
+  $pass = md5($pass . $hash);
 
-  //
+  // подключение к базе данных
+  // порядок значений(хост, имя, пароль, база данных)
+  $mysql = new mysqli('localhost', 'root', 'root', 'testing');
+
+  // помещаем данные в таблицу
+  $mysql->query("INSERT INTO `users` (`name`, `email`, `login`, `pass`)
+    VALUES('$username', '$email', '$login', '$pass')");
+
+  // закрытие базы данных
+  $mysql->close();
+
+
 ?>

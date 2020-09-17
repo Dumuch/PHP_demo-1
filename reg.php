@@ -19,14 +19,14 @@
           <label for="username">Ваше имя</label>
           <input type="text" name="username" id="username" class="form-control">
 
-          <label for="Email">Email</label>
-          <input type="text" name="Email" id="Email" class="form-control">
+          <label for="email">Email</label>
+          <input type="text" name="email" id="email" class="form-control">
 
           <label for="login">Логин</label>
           <input type="text" name="login" id="login" class="form-control">
 
-          <label for="password">Пароль</label>
-          <input type="password" name="password" id="password" class="form-control">
+          <label for="pass">Пароль</label>
+          <input type="password" name="pass" id="pass" class="form-control">
 
           <button type="submit" class="btn btn-success mt-5">
             Зарегистрироваться
