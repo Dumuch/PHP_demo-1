@@ -22,19 +22,20 @@
 
 
   // шифруем пароль
-  $hash = "reiuljkfikem8478iKJjntg";
-  $pass = md5($pass . $hash);
+  $pass = md5($pass . "werikkn589rikN");
 
   // подключение к базе данных
   // порядок значений(хост, имя, пароль, база данных)
-  $mysql = new mysqli('localhost', 'root', 'root', 'testing');
+  $mysqli = new mysqli('localhost', 'root', 'root', 'testing');
 
   // помещаем данные в таблицу
-  $mysql->query("INSERT INTO `users` (`name`, `email`, `login`, `pass`)
+  $mysqli->query("INSERT INTO `users` (`name`, `email`, `login`, `pass`)
     VALUES('$username', '$email', '$login', '$pass')");
 
   // закрытие базы данных
-  $mysql->close();
+  $mysqli->close();
 
+  //перенаправление после отправки формы
+  // header('Location: /');
 
 ?>
